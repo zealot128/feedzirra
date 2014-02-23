@@ -87,7 +87,6 @@ module Feedzirra
             responses[url] = feed
             @options[:on_success].call(url, feed) if @options.has_key?(:on_success)
           rescue Exception => e
-            binding.pry
             call_on_failure(response, e, @options[:on_failure])
           end
         end
@@ -147,7 +146,6 @@ module Feedzirra
           xml = c.body
         end
       elsif c.headers.to_s.match(/Content-Encoding: deflate/i)
-        binding.pry
         xml = Zlib::Inflate.inflate(c.body)
       else
         xml = c.body
